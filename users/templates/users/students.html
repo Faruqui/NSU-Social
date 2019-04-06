@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  <legend class="border-bottom mb-4">All Students: </legend>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email Address</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for p in students %}
+      <tr>
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.email}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock content %}

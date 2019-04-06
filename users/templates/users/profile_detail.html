@@ -1,0 +1,66 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+    <div class="content-section">
+      <!-- Profile info HERE -->
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ object.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ object.user.username }} </h2>
+
+          <table class="container">
+            <tr>
+              <td>Name</td>
+              <td>: {{ object.user.first_name }} {{ object.user.last_name }}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>: {{ object.user.email }}</td>
+            </tr>
+            <tr>
+              <td>ID </td>
+              <td>: {{object.nsu_id}}</td>
+            </tr>
+            <tr>
+              <td>Joined</td>
+              <td>: {{object.date_registered | date:"M d, Y"}}</td>
+            </tr>
+          </table>
+          <br>
+
+          <!-- Social media links -->
+          <div class="container">
+            <a href="{{ object.fb_link }}">
+              <img src="{% static 'logo/fblogo.png' %}" height="20px"  alt="">
+            </a>
+            <a href="{{ object.fb_link }}">
+              <img src="{% static 'logo/twitter.jpg' %}" height="20px"  alt="">
+            </a>
+            <a href="{{ object.fb_link }}">
+              <img src="{% static 'logo/insta.png' %}" height="20px"  alt="">
+            </a>
+            <a href="{{ object.fb_link }}">
+              <img src="{% static 'logo/git.png' %}" height="20px"  alt="">
+            </a>
+            <a href="{{ object.fb_link }}">
+              <img src="{% static 'logo/linkedin.png' %}" height="20px"  alt="">
+            </a>
+          </div>
+          <br>
+
+
+          <p class="text-info">{{ object.status }}</p>
+        </div>
+      </div>
+
+      <legend class="border-bottom mb-4">Bio: </legend>
+      <article class="media content-section">
+        <p>{{ object.bio }}</p>
+      </article>
+
+      <!-- Posts HERE -->
+    </div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+      <!-- Profile info HERE -->
+
+
+
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }} </h2>
+
+          <p class="text-secondary">
+            Name: {{ user.first_name }} {{ user.last_name }} <br>
+            Email: {{ user.email }} <br>
+            Memeber Since: {{ user.profile.date_registered|date:"d M, Y"  }}<br>
+            Facebook: <a href="{{ user.profile.fb_link }}">Fb</a>
+          </p>
+
+          <p class="text-info">{{ user.profile.status }}</p>
+        </div>
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'editprofile' %}">Edit</a>
+
+      </div>
+
+      <legend class="border-bottom mb-4">Bio: </legend>
+      <article class="media content-section">
+        <p>{{ user.profile.bio }}</p>
+      </article>
+
+      <!-- Posts HERE -->
+      <legend class="border-bottom mb-4">Posts: </legend>
+        {% for post in posts %}
+          {% if post.author == user %}
+            <article class="media content-section">
+              <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" alt="">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="{% url 'user-detail' post.author.profile.id %}">{{ post.author }}</a>
+                  <small class="text-muted">{{ post.date_posted|date:"d M, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+              </div>
+            </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}
