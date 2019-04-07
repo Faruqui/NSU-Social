@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'groups.apps.GroupsConfig',
+    'gposts.apps.GpostsConfig',
     'crispy_forms',
 ]
 

@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('users.urls')),
+    path('groups/',include("groups.urls", namespace="groups")),
+
     path('register/', user_views.register, name = "register"),
     path('profile/', user_views.profile, name = "profile"),
     path('editprofile/', user_views.editprofile, name = "editprofile"),

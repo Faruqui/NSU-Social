@@ -11,11 +11,11 @@ class Profile(models.Model):
     status = models.CharField(max_length = 100, default = 'Status')
     bio = models.TextField(default = 'Bio')
     date_registered = models.DateTimeField(default=timezone.now)
-    fb_link = models.URLField(null = True)
-    insta_link = models.URLField(null = True)
-    git_link = models.URLField(null = True)
-    linkedin_link = models.URLField(null = True)
-    twitter_link = models.URLField(null = True)
+    fb_link = models.URLField(default = 'https://www.facebook.com/')
+    insta_link = models.URLField(default = 'https://www.instagram.com/')
+    git_link = models.URLField(default = 'https://github.com/')
+    linkedin_link = models.URLField(default = 'https://bd.linkedin.com/')
+    twitter_link = models.URLField(default = 'https://twitter.com/')
 
     def __str__(self):
         return f'{self.user.username} Profile'

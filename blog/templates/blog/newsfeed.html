@@ -4,9 +4,6 @@
 {% if user.is_authenticated %}
   <h3>number: {{ num }}</h3>
   <h2>{{ user.username }}'s Newsfeed:</h2>
-  {% for std in students %}
-  <h5> {{std.email}}</h5>
-  {% endfor %}
 
     {% for post in posts %}
 

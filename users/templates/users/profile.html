@@ -16,7 +16,6 @@
             Name: {{ user.first_name }} {{ user.last_name }} <br>
             Email: {{ user.email }} <br>
             Memeber Since: {{ user.profile.date_registered|date:"d M, Y"  }}<br>
-            Facebook: <a href="{{ user.profile.fb_link }}">Fb</a>
           </p>
 
           <p class="text-info">{{ user.profile.status }}</p>
