@@ -1,10 +1,11 @@
 from django import forms
 from . import models
+from groups.models import Group, GroupMember
 
 
 class PostForm(forms.ModelForm):
     class Meta:
-        fields = ("message", "group")
+        fields = ("group", "message")
         model = models.Post
 
     def __init__(self, *args, **kwargs):
@@ -16,3 +17,12 @@ class PostForm(forms.ModelForm):
                     pk__in=user.groups.values_list("group__pk")
                 )
             )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        grp_name = cleaned_data.get('group')
+        msg = cleaned_data.get('message')
+        grp = Group.objects.filter(name = grp_name)
+
+        if user not in grp.members.all:
+            raise forms.ValidationError("You are not in this group!!")

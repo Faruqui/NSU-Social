@@ -2,23 +2,21 @@
 
 {% block pregroup %}
 <div class="container">
-  <h1>{{group.name}}</h1>
-  <h2> Member Count: {{group.members.count}}</h2>
-
+  <h3>{{group.name}}</h3>
+  <small> Member Count: {{group.members.count}}</small>
   <div class="content">
   	{% if user in group.members.all %}
   		<a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-outline-danger"><span class="fa fa-times-circle-o"></span> Leave</a>
   	{% else %}
   		<a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-outline-primary"><span class="fa fa-check-circle-o"></span> Join</a>
   	{% endif %}
-
   </div>
 </div>
 {% endblock %}
 
 {% block group_content %}
-
-<div class="col-md-8">
+<legend class="border-bottom mb-4">Group Posts: </legend>
+<div class="container">
 	{% if group.posts.count == 0 %}
 	<h2>No posts in this group yet!</h2>
 
@@ -28,4 +26,22 @@
     {% endfor %}
 	{% endif %}
 </div>
+
+{% endblock %}
+
+{% block group_side %}
+  <legend class="border-bottom mb-4">Group Members: </legend>
+  <div class="container">
+  	<div class="list-group">
+      {% for p in group.members.all %}
+
+  		<a href="{% url 'user-detail' p.profile.id %}"
+  		class="list-group-item list-group-item-action flex-column align-items-start">
+  			<img src="{{ p.profile.image.url }}" height="33px">
+        {{ p.username }}
+  		</a>
+
+  	{% endfor %}
+  </div>
+  </div>
 {% endblock %}

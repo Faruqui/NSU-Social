@@ -69,9 +69,22 @@
         <div class="navbar-nav">
 
           {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'profile' %}"></a>
             <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-            <a class="nav-item nav-link" href="{% url 'profile' %}">{{user.username}}</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                <img src="{{ user.profile.image.url }}" height="33px">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+
+                <a class="dropdown-item " href="{% url 'profile' %}">Your Profile</a>
+                <a class="dropdown-item " href="{% url 'user-posts' user.username %}">Your Posts</a>
+                <a class="dropdown-item border-bottom mb-2" href="{% url 'editprofile' %}">Edit Profile</a>
+                <a class="dropdown-item " href="{% url 'logout' %}">Logout</a>
+              </div>
+            </li>
+
           {% else %}
             <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
             <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
@@ -92,7 +105,7 @@
               <div class="card">
                 <img class="card-img-top" src="{{ user.profile.image.url }}" alt="Card image cap">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="{% url 'profile' %}">{{ user.username }}</a></h5>
+                  <h5 class="card-title"><a href="{% url 'user-detail' user.profile.id %}">{{ user.username }}</a></h5>
 
                   <table class="container">
                     <tr>
@@ -148,6 +161,9 @@
 
         </div>
 
+        <div class="col-md-3">
+          {% block side_content %}{% endblock %}
+        </div>
       </div>
     </main>
 
