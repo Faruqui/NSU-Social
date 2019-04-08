@@ -30,7 +30,9 @@
             </tr>
           </table>
           <br>
-
+          <a class="btn btn-primary" href="{% url 'user-posts' object.user.username %}">See Blog posts</a>
+          <br>
+          <br>
           <!-- Social media links -->
           <div class="container">
             <a href="{{ object.fb_link }}">

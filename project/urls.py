@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('', include('users.urls')),
     path('groups/',include("groups.urls", namespace="groups")),
+    path('posts/', include("posts.urls", namespace="posts")),
 
     path('register/', user_views.register, name = "register"),
     path('profile/', user_views.profile, name = "profile"),

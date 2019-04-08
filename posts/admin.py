@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import GPost
-
+from .models import Post
 # Register your models here.
-admin.site.register(GPost)
+admin.site.register(Post)

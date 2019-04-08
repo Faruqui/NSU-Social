@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404
 from .models import Profile, Student
 
 class UserRegisterForm(UserCreationForm):
@@ -8,6 +9,17 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(label = (u'Email Adress')) #for labelling
     nsu_id = forms.IntegerField(label = (u'NSU ID'))
     #nsu_ID = forms.IntegerField(required=False)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        mail = cleaned_data.get('email')
+        nsuID = cleaned_data.get('nsu_id')
+        x = 0
+        if Student.objects.filter(email = mail).count() > 0:
+            x = get_object_or_404(Student, email=mail).id
+        if x != nsuID:
+            raise forms.ValidationError("ID and email don't match")
+
     def clean_email(self):
         data = self.cleaned_data['email']
         std = Student.objects.filter(email = data)

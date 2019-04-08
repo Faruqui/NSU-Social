@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.models import User
 from blog.models import Post
+from groups.models import Group, GroupMember
 from .models import Profile, Student
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,6 +28,7 @@ def register(request):
 def profile(request):
     context = {
         'posts' : Post.objects.all(),
+        'groups' : Group.objects.all(),
         'title' : 'Profile',
     }
     return render(request, 'users/profile.html', context)
@@ -75,6 +77,7 @@ class UserListView(LoginRequiredMixin, ListView):
     #<app>/<model>_<viewtype>.html
     context_object_name = 'profiles' #use post.author instead of object.author
     ordering = ['user']
+    paginate_by = 10 #buit in paginator function
 
 class StudentListView(LoginRequiredMixin, ListView):
     model = Student

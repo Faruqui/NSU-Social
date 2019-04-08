@@ -23,11 +23,9 @@
 	<h2>No posts in this group yet!</h2>
 
 	{% else %}
-
-		{% for post in group.posts.all %}
-
-		{% endfor %}
-
+    {% for post in group.posts.all %}
+      {% include "posts/_post.html" %}
+    {% endfor %}
 	{% endif %}
 </div>
 {% endblock %}
