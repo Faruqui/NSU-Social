@@ -15,10 +15,10 @@ class CreateGroup(LoginRequiredMixin, generic.CreateView):
     model = Group
 
 
-class SingleGroup(generic.DetailView):
+class SingleGroup(LoginRequiredMixin, generic.DetailView):
     model = Group
 
-class ListGroups(generic.ListView):
+class ListGroups(LoginRequiredMixin, generic.ListView):
     model = Group
 
 

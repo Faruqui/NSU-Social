@@ -19,7 +19,7 @@ def home(request):
     }
     return render(request, 'blog/home.html', context)
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'blog/home.html'
     #<app>/<model>_<viewtype>.html
@@ -27,7 +27,7 @@ class PostListView(ListView):
     ordering = ['-date_posted'] #for ordering accoing to date
     paginate_by = 10 #buit in paginator function
 
-class UserPostListView(ListView):
+class UserPostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
@@ -39,7 +39,7 @@ class UserPostListView(ListView):
 
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
