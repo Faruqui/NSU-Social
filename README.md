@@ -16,7 +16,7 @@ py manage.py makemigrations
 py manage.py migrate
 
 
-Package install:
+Package install
 conda install -c conda-forge django-crispy-forms
 
 conda install -c anaconda pillow 
@@ -27,7 +27,7 @@ pip install pyinstaller
 pyinstaller -w -F -i "D:\Python\Compiler_Test\icon.ico" compiler.py
 
 
-Admin page:
+Admin page
 py manage.py makemigraions
 py manage.py migrate
 py manage.py createsuperuser
