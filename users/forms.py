@@ -14,7 +14,7 @@ class UserRegisterForm(UserCreationForm):
         cleaned_data = super().clean()
         mail = cleaned_data.get('email')
         nsuID = cleaned_data.get('nsu_id')
-        x = 0
+        x = "afsaf"
         if Student.objects.filter(email = mail).count() > 0:
             x = get_object_or_404(Student, email=mail).id
         if x != nsuID:
@@ -61,7 +61,7 @@ class ProfileUpdateForm(forms.ModelForm):
     def clean_fb_link(self):
         data = self.cleaned_data['fb_link']
         if "facebook.com/" not in data:   # any check you need
-            raise forms.ValidationError("Must be use your facebook profile address")
+            raise forms.ValidationError("Must be your facebook profile link")
         return data
 
     class Meta:

@@ -31,6 +31,7 @@
           </table>
           <br>
           <a class="btn btn-primary" href="{% url 'user-posts' object.user.username %}">See Blog posts</a>
+          <a class="btn btn-info" href="{% url 'posts:for_user' username=object.user.username %}">See Group posts</a>
           <br>
           <br>
           <!-- Social media links -->

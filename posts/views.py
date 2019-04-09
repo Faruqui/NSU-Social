@@ -17,6 +17,7 @@ User = get_user_model()
 class PostList(SelectRelatedMixin, generic.ListView):
     model = models.Post
     select_related = ("user", "group")
+    paginate_by = 10
 
 
 class UserPosts(generic.ListView):
@@ -51,9 +52,10 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
 
 
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
-    # form_class = forms.PostForm
+    #form_class = forms.PostForm
     fields = ('message','group')
     model = models.Post
+    success_url = reverse_lazy("posts:all")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

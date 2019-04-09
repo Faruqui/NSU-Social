@@ -45,7 +45,23 @@
                 <a class="dropdown-item " href="{% url 'blog-newsfeed' %}">Newsfeed</a>
               </div>
             </li>
-            <a class="nav-item nav-link" href="{% url 'groups:all' %}">Groups</a>
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'groups:all' %}" id="navbardrop" data-toggle="dropdown">
+                Groups
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item border-bottom mb-2" href="{% url 'groups:all' %}">All Groups</a>
+                <a class="dropdown-item " href="{% url 'posts:all' %}">All Posts</a>
+                <a class="dropdown-item border-bottom mb-2" href="{% url 'posts:for_user' username=user.username %}">Your Posts</a>
+
+                <a class="dropdown-item " href="{% url 'posts:create' %}">Create Post</a>
+                <a class="dropdown-item " href="{% url 'groups:create' %}">Create Group</a>
+
+              </div>
+            </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 Community
@@ -107,16 +123,10 @@
                 <div class="card-body">
                   <h5 class="card-title"><a href="{% url 'user-detail' user.profile.id %}">{{ user.username }}</a></h5>
 
-                  <table class="container">
-                    <tr>
 
-
-                    </tr>
-                    <tr>
-                      <td>Joined</td>
-                      <td>: {{user.profile.date_registered | date:"M d, Y"}}</td>
-                    </tr>
-                  </table>
+                  <small>Blog Posts: <a href="{% url 'user-posts' user.username %}">{{ user.post.count }}</a></small><br>
+                  <small>Group Posts: <a href="{% url 'posts:for_user' username=user.username %}">{{ user.posts.count }}</a></small><br>
+                  <small>Joined: {{ user.profile.date_registered|date:"d M, Y"  }}</small><br>
                   <br>
 
                   <!-- Social media links -->

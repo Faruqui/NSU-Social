@@ -1,22 +1,13 @@
 {% extends "groups/group_base.html" %}
 
-{% block pregroup %}
-<div class="container">
-  <h3>{{group.name}}</h3>
-  <small> Member Count: {{group.members.count}}</small>
-  <div class="content">
-  	{% if user in group.members.all %}
-  		<a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-outline-danger"><span class="fa fa-times-circle-o"></span> Leave</a>
-  	{% else %}
-  		<a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-outline-primary"><span class="fa fa-check-circle-o"></span> Join</a>
-  	{% endif %}
-  </div>
-</div>
-{% endblock %}
-
 {% block group_content %}
 <legend class="border-bottom mb-4">Group Posts: </legend>
 <div class="container">
+	{% if user in group.members.all %}
+	<div class="container">
+		<a href="{% url 'posts:create' %}" class="btn btn-info" role="button"><span class="fa fa-plus"></span>New Post</a>
+	</div>
+	{% endif %}
 	{% if group.posts.count == 0 %}
 	<h2>No posts in this group yet!</h2>
 
@@ -30,7 +21,32 @@
 {% endblock %}
 
 {% block group_side %}
-  <legend class="border-bottom mb-4">Group Members: </legend>
+<div class="container">
+
+  <legend class="border-bottom mb-4">Group Details: </legend>
+  <div class="row">
+  <div class="col">
+		<h5 class="text-info"> {{group.name}}</h5>
+		<small>{{ group.description }}</small>
+  </div>
+  <div class="<col span="4">
+    <div class="content">
+    	{% if user in group.members.all %}
+			<div class="container">
+				<a href="{% url 'posts:create' %}" class="btn btn-info" role="button"><span class="fa fa-plus"></span>Post</a>
+			</div>
+				<div class="container">
+    		<a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-danger"><span class="fa fa-times-circle-o"></span>Leave</a>
+				</div>
+    	{% else %}
+    		<a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-success"><span class="fa fa-check-circle-o"></span>Join</a>
+    	{% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+  <legend class="border-bottom mb-4">Group Members({{group.members.count}}): </legend>
   <div class="container">
   	<div class="list-group">
       {% for p in group.members.all %}

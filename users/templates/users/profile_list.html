@@ -26,18 +26,20 @@
   {% endif %}
 
     {% for p in profiles %}
-      <div class="content-section">
-        <div class="media">
-          <img class="rounded-circle account-img" src="{{ p.image.url }}">
+        <article class="media content-section">
+          <img class="rounded-circle account-img" src="{{ p.image.url }}" alt="">
           <div class="media-body">
-            <h4><a class="article-title" href="{% url 'user-detail' p.id %}">
-              {{ p.user.username }}
-            </a></h4>
-            <small>{{ p.user.email }}</small>
-            <p class="text-secondary">Memeber Since: {{ p.date_registered|date:"d M, Y"  }}</p>
-            <p class="text-info">{{ p.status }}</p>
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'user-detail' p.id %}">{{ p.user.username }} </a>
+              <small class="text-muted"><a href="{% url 'user-detail' p.id %}">
+                {{ p.user.email }}</a></small>
+                <small class="float-right">Member Since: {{ p.date_registered|date:"d M, Y"  }}</small>
+            </div>
+
+            <small>Blog Posts: <a href="{% url 'user-posts' p.user.username %}">{{ p.user.post.count }}</a></small><br>
+            <small>Group Posts: <a href="{% url 'posts:for_user' username=p.user.username %}">{{ p.user.posts.count }}</a></small><br>
+
           </div>
-        </div>
-        </div >
+        </article>
     {% endfor %}
 {% endblock content %}

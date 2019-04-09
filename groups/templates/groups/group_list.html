@@ -40,7 +40,8 @@
 		{% if user in group.members.all %}
 		<a href="{% url 'groups:single' slug=group.slug %}"
 		class="list-group-item list-group-item-action flex-column align-items-start">
-			<h3 class="mb-0">{{ group.name }}</h3>
+			
+			<small class="mb-0">{{ group.name }}</small>
 		</a>
 		{% endif %}
 	{% endfor %}
