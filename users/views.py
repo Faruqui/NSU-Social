@@ -84,6 +84,7 @@ class StudentListView(LoginRequiredMixin, ListView):
     context_object_name = 'students'
     template_name = 'users/students.html'
     ordering = ['id']
+    paginate_by = 20
 
 
 

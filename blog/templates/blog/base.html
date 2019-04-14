@@ -42,7 +42,8 @@
               <div class="dropdown-menu">
 
                 <a class="dropdown-item " href="{% url 'post-create' %}">New Post</a>
-                <a class="dropdown-item " href="{% url 'blog-newsfeed' %}">Newsfeed</a>
+                <a class="dropdown-item border-bottom mb-2" href="{% url 'user-posts' user.username %}">Your Posts</a>
+                <a class="dropdown-item " href="{% url 'blog-home' %}">All Post</a>
               </div>
             </li>
 
@@ -184,6 +185,89 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
+    <footer class="footer">
+       <div class="container-flow jumbotron">
+         <div class="row">
 
+           <div class="col-md-12 col-lg-4">
+             <div class="footer-logo">
+
+               <a class="navbar-brand" href="#">NSU Social</a>
+               <p>A social platform for the students of NSU.</p>
+
+             </div>
+           </div>
+
+           <div class="col-sm-6 col-md-3 col-lg-2">
+             <div class="list-menu">
+
+               <h4>About Us</h4>
+
+               <ul class="list-unstyled">
+                 <li><a href="{% url 'blog-about' %}">About us</a></li>
+               </ul>
+
+             </div>
+           </div>
+
+           <div class="col-sm-6 col-md-3 col-lg-2">
+             <div class="list-menu">
+
+               <h4>Backend</h4>
+
+               <ul class="list-unstyled">
+                 <li><a href="#">Python</a></li>
+                 <li><a href="#">Django</a></li>
+               </ul>
+
+             </div>
+           </div>
+
+           <div class="col-sm-6 col-md-3 col-lg-2">
+             <div class="list-menu">
+
+               <h4>DEVELOPED BY</h4>
+
+               <ul class="list-unstyled">
+                 <li>Name: <a href="#">S. M. Al Faruqui</a></li>
+                 <li>ID: <a href="#">172 1395 042</a></li>
+               </ul>
+
+             </div>
+           </div>
+
+           <div class="col-sm-6 col-md-3 col-lg-2">
+             <div class="list-menu">
+
+               <h4>Developed For:</h4>
+
+               <ul class="list-unstyled">
+                 <li>Course: <a href="#">CSE 299</a></li>
+                 <li>Sec: <a href="#">19</a></li>
+                 <li>Semester: <a href="#">Sping, 2019</a></li>
+                 <li>Faculty: <a href="#">ZBZ</a></li>
+               </ul>
+
+             </div>
+           </div>
+
+         </div>
+       </div>
+
+       <div class="copyrights">
+         <div class="container">
+           <p>&copy; Copyrights NSU Social. All rights reserved.</p>
+           <div class="credits">
+             <!--
+               All the links in the footer should remain intact.
+               You can delete the links only if you purchased the pro version.
+               Licensing information: https://bootstrapmade.com/license/
+               Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eStartup
+             -->
+           </div>
+         </div>
+       </div>
+
+     </footer>
 </body>
 </html>

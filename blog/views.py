@@ -10,14 +10,16 @@ from django.views.generic import (
     DeleteView
 )
 from . models import Post
+from groups.models import Group
 from users.models import Student
 
-def home(request):
+def index(request):
     context = {
         'posts' : Post.objects.all(),
-        'title' : 'Home',
+        'groups' : Group.objects.all(),
+        'title' : 'Index',
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
 
 class PostListView(LoginRequiredMixin, ListView):
     model = Post

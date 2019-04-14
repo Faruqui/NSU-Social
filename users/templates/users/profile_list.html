@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+<div class="container col-md-10">
   <legend class="border-bottom mb-4">All Members ( {{ page_obj.paginator.count }} ) : </legend>
 
   <!--Paginator -->
@@ -32,7 +33,7 @@
             <div class="article-metadata">
               <a class="mr-2" href="{% url 'user-detail' p.id %}">{{ p.user.username }} </a>
               <small class="text-muted"><a href="{% url 'user-detail' p.id %}">
-                {{ p.user.email }}</a></small>
+                ({{ p.user.email }})</a></small>
                 <small class="float-right">Member Since: {{ p.date_registered|date:"d M, Y"  }}</small>
             </div>
 
@@ -42,4 +43,5 @@
           </div>
         </article>
     {% endfor %}
+  </div>
 {% endblock content %}

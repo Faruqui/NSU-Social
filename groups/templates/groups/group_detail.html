@@ -1,23 +1,24 @@
 {% extends "groups/group_base.html" %}
 
 {% block group_content %}
-<legend class="border-bottom mb-4">Group Posts: </legend>
-<div class="container">
-	{% if user in group.members.all %}
+<div class="container col-md-10">
+	<legend class="border-bottom mb-4">Group Posts: </legend>
 	<div class="container">
-		<a href="{% url 'posts:create' %}" class="btn btn-info" role="button"><span class="fa fa-plus"></span>New Post</a>
+		{% if user in group.members.all %}
+		<div class="container">
+			<a href="{% url 'posts:create' %}" class="btn btn-info" role="button"><span class="fa fa-plus"></span>New Post</a>
+		</div>
+		{% endif %}
+		{% if group.posts.count == 0 %}
+		<h2>No posts in this group yet!</h2>
+
+		{% else %}
+	    {% for post in group.posts.all %}
+	      {% include "posts/_post.html" %}
+	    {% endfor %}
+		{% endif %}
 	</div>
-	{% endif %}
-	{% if group.posts.count == 0 %}
-	<h2>No posts in this group yet!</h2>
-
-	{% else %}
-    {% for post in group.posts.all %}
-      {% include "posts/_post.html" %}
-    {% endfor %}
-	{% endif %}
 </div>
-
 {% endblock %}
 
 {% block group_side %}

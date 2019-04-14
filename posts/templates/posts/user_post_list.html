@@ -1,15 +1,17 @@
 {% extends "posts/post_base.html" %}
 
 {% block prepost %}
-<div class="container">
+<div class="container col-md-5">
 	<h5>{{ post_user.username }}'s Group Posts ({{ post_user.posts.count }})</h5>
 </div>
 {% endblock %}
 
 {% block post_content %}
-<div class="container">
-	{% for post in post_list %}
-		{% include "posts/_post.html" %}
-	{% endfor %}
+<div class="container col-md-10">
+	<div class="container">
+		{% for post in post_list %}
+			{% include "posts/_post.html" %}
+		{% endfor %}
+	</div>
 </div>
 {% endblock %}

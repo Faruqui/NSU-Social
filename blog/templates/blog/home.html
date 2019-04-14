@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+<div class="container col-md-10">
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" alt="">
@@ -44,5 +45,29 @@
       {% endif %}
 
     {% endif %}
-
+</div>
 {% endblock content %}
+
+{% block side_content %}
+<div class="container">
+  <div class="content-section">
+    <h3>Hello!</h3>
+    <p class='text-muted'>Welcome to NSU Social
+      <ul class="list-group">
+
+        <a href="{% url 'blog-home' %} "class="list-group-item list-group-item-action flex-column align-items-start">
+          <b class="mb-0" style = "color:#8308e0;">Latest Posts</b></a>
+
+        <a href="{% url 'groups:all' %}"class="list-group-item list-group-item-action flex-column align-items-start">
+          <b class="mb-0" style = "color:#8308e0;">Groups</b></a>
+
+        <a href="{% url 'members' %}"class="list-group-item list-group-item-action flex-column align-items-start">
+          <b class="mb-0" style = "color:#8308e0;">Community</b></a>
+
+        <a href="{% url 'post-create' %}"class="list-group-item list-group-item-action flex-column align-items-start">
+          <b class="mb-0" style = "color:#0aafc9;">New Post</b></a>
+
+      </ul>
+    </p>
+  </div>
+{% endblock side_content %}
