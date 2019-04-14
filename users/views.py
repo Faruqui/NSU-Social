@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.models import User
 from blog.models import Post
 from groups.models import Group, GroupMember
 from .models import Profile, Student
+from django.urls import reverse_lazy
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 def register(request):
@@ -86,6 +87,14 @@ class StudentListView(LoginRequiredMixin, ListView):
     ordering = ['id']
     paginate_by = 20
 
+class CreateStudent(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    #form_class = forms.PostForm
+    fields = ('name','id', 'email')
+    model = Student
+    success_url = reverse_lazy("students")
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 
