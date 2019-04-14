@@ -38,7 +38,7 @@
 
             <small>Blog Posts: <a href="{% url 'user-posts' p.user.username %}">{{ p.user.post.count }}</a></small><br>
             <small>Group Posts: <a href="{% url 'posts:for_user' username=p.user.username %}">{{ p.user.posts.count }}</a></small><br>
-
+            <p class="text-info">{{ p.status }}</p>
           </div>
         </article>
     {% endfor %}

@@ -63,6 +63,12 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user in post.groups.members.all:
+            return True
+        return False
+
 
 class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     model = models.Post

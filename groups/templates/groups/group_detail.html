@@ -32,9 +32,6 @@
   <div class="<col span="4">
     <div class="content">
     	{% if user in group.members.all %}
-			<div class="container">
-				<a href="{% url 'posts:create' %}" class="btn btn-info" role="button"><span class="fa fa-plus"></span>Post</a>
-			</div>
 				<div class="container">
     		<a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-danger"><span class="fa fa-times-circle-o"></span>Leave</a>
 				</div>
