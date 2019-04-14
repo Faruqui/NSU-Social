@@ -27,3 +27,4 @@ class Student(models.Model):
     name = models.CharField(max_length = 50)
     id = models.IntegerField(primary_key=True)
     email = models.EmailField(unique = True)
+    date_registered = models.DateTimeField(default=timezone.now)

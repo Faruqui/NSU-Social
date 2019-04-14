@@ -13,13 +13,14 @@
             </div>
             <h4><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
             <p class="article-content">{{ post.content }}</p>
+            {% if post.author == user or user.is_staff %}
+            <div class="float-right">
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+            </div>
+            {% endif %}
           </div>
-          {% if post.author == user %}
-          <div class="">
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
-          </div>
-          {% endif %}
+
         </article>
     {% endfor %}
 
@@ -49,23 +50,26 @@
 {% endblock content %}
 
 {% block side_content %}
-<div class="container">
+<div class="container col-md-10">
   <div class="content-section">
-    <h3>Hello!</h3>
-    <p class='text-muted'>Welcome to NSU Social
+    <h3 class="text-center text-info">Hello!</h3>
+    <p class='text-muted text-center'>Welcome to NSU Social
       <ul class="list-group">
 
-        <a href="{% url 'blog-home' %} "class="list-group-item list-group-item-action flex-column align-items-start">
-          <b class="mb-0" style = "color:#8308e0;">Latest Posts</b></a>
+        <a href="{% url 'blog-home' %} "class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Latest Posts</b></a>
 
-        <a href="{% url 'groups:all' %}"class="list-group-item list-group-item-action flex-column align-items-start">
-          <b class="mb-0" style = "color:#8308e0;">Groups</b></a>
+        <a href="{% url 'user-posts' user.username %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Your Posts</b></a>
 
-        <a href="{% url 'members' %}"class="list-group-item list-group-item-action flex-column align-items-start">
-          <b class="mb-0" style = "color:#8308e0;">Community</b></a>
+        <a href="{% url 'groups:all' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Groups</b></a>
 
-        <a href="{% url 'post-create' %}"class="list-group-item list-group-item-action flex-column align-items-start">
-          <b class="mb-0" style = "color:#0aafc9;">New Post</b></a>
+        <a href="{% url 'members' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Community</b></a>
+
+        <a href="{% url 'post-create' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-info text-center">
+          <b class="mb-0 text-white">New Post</b></a>
 
       </ul>
     </p>

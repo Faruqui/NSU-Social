@@ -23,6 +23,7 @@ class PostList(LoginRequiredMixin, SelectRelatedMixin, generic.ListView):
 class UserPosts(LoginRequiredMixin, generic.ListView):
     model = models.Post
     template_name = "posts/user_post_list.html"
+    paginate_by = 10
 
     def get_queryset(self):
         try:

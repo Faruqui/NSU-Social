@@ -3,19 +3,19 @@
 
 {% block content %}
 
-<div class="container col-md-5" style = "margin-top: 8rem;">
+<div class="container col-md-5" style = "margin-top: 8rem; margin-bottom: 10rem;">
     <div class="content-section bg-steel">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4 text-center">Sign In</legend>
+                <legend class="border-bottom mb-4 text-center text-info"><b>Sign In</b></legend>
                 {{ form | crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign In</button>
+            <div class="form-group text-center">
+                <button class="btn btn-info" type="submit">Sign In</button>
             </div>
         </form>
-        <div class="border-top pt-3">
+        <div class="border-top pt-3 text-right">
             <small class="text-muted">
                 Need to create a new account? <a class="ml-2" href="{% url 'register' %}">Register Here</a>
             </small>

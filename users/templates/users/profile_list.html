@@ -32,6 +32,7 @@
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="{% url 'user-detail' p.id %}">{{ p.user.username }} </a>
+
               <small class="text-muted"><a href="{% url 'user-detail' p.id %}">
                 ({{ p.user.email }})</a></small>
                 <small class="float-right">Member Since: {{ p.date_registered|date:"d M, Y"  }}</small>
@@ -40,7 +41,11 @@
             <small>Blog Posts: <a href="{% url 'user-posts' p.user.username %}">{{ p.user.post.count }}</a></small><br>
             <small>Group Posts: <a href="{% url 'posts:for_user' username=p.user.username %}">{{ p.user.posts.count }}</a></small><br>
             <p class="text-info">{{ p.status }}</p>
+            {% if user.is_staff %}
+              <a class="btn btn-danger btn-sm mt-1 mb-1 float-right" href="{% url 'user-delete' p.user.id %}">Delete User</a>
+            {% endif %}
           </div>
+
         </article>
     {% endfor %}
   </div>

@@ -1,7 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.models import User
 from blog.models import Post
@@ -85,7 +92,7 @@ class StudentListView(LoginRequiredMixin, ListView):
     context_object_name = 'students'
     template_name = 'users/students.html'
     ordering = ['id']
-    paginate_by = 20
+    paginate_by = 25
 
 class CreateStudent(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     #form_class = forms.PostForm
@@ -100,3 +107,15 @@ class CreateStudent(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = Profile
+
+class DeleteAccount(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy("members")
+    template_name = 'users/user_confirm_delete.html'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def delete(self, *args, **kwargs):
+        messages.success(self.request, "User account Deleted from database")
+        return super().delete(*args, **kwargs)

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -27,7 +28,7 @@ class PostListView(LoginRequiredMixin, ListView):
     #<app>/<model>_<viewtype>.html
     context_object_name = 'posts' #use post.author instead of object.author
     ordering = ['-date_posted'] #for ordering accoing to date
-    paginate_by = 10 #buit in paginator function
+    paginate_by = 15 #buit in paginator function
 
 class UserPostListView(LoginRequiredMixin, ListView):
     model = Post
@@ -49,9 +50,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = '/'
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
+        if self.request.user == post.author or self.request.user.is_staff:
             return True
         return False
+    def delete(self, *args, **kwargs):
+        messages.success(self.request, "Post Deleted from database")
+        return super().delete(*args, **kwargs)
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -70,15 +74,20 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         #form<this form> <set author> = current logged in user
-        form.instance.author = self.request.user
+        #form.instance.author = self.request.user
         #run overridden form_valid method
         return super().form_valid(form)
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
+        if self.request.user == post.author or self.request.user.is_staff:
             return True
         return False
+
+    def update(self, *args, **kwargs):
+        messages.success(self.request, "Post Updated!")
+        return super().update(*args, **kwargs)
+
 
 
 def about(request):
