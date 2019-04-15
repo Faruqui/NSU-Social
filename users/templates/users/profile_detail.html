@@ -11,6 +11,8 @@
         <div class="media-body">
           <h2 class="account-heading">{{ object.user.username }} </h2>
 
+          <p class="text-info">{{ object.status }}</p>
+
           <table class="container">
             <tr>
               <td>Name</td>
@@ -21,17 +23,15 @@
               <td>: {{ object.user.email }}</td>
             </tr>
             <tr>
-              <td>ID </td>
-              <td>: {{object.nsu_id}}</td>
-            </tr>
-            <tr>
               <td>Joined</td>
               <td>: {{object.date_registered | date:"M d, Y"}}</td>
             </tr>
           </table>
           <br>
-          <a class="btn btn-primary" href="{% url 'user-posts' object.user.username %}">See Blog posts</a>
-          <a class="btn btn-info" href="{% url 'posts:for_user' username=object.user.username %}">See Group posts</a>
+          <a class="btn btn-primary" href="{% url 'user-posts' object.user.username %}">See Blog posts <span class="badge badge-light">
+  					{{ object.user.post.count }}</span></a>
+          <a class="btn btn-info" href="{% url 'posts:for_user' username=object.user.username %}">See Group posts <span class="badge badge-light">
+  					{{ object.user.posts.count }}</span></a>
           <br>
           <br>
           <!-- Social media links -->
@@ -55,7 +55,7 @@
           <br>
 
 
-          <p class="text-info">{{ object.status }}</p>
+
         </div>
       </div>
 

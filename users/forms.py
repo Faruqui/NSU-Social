@@ -6,7 +6,7 @@ from .models import Profile, Student
 
 class UserRegisterForm(UserCreationForm):
     #email = forms.EmailField()
-    email = forms.EmailField(label = (u'Email Adress')) #for labelling
+    email = forms.EmailField(label = (u'NSU Email Adress')) #for labelling
     nsu_id = forms.IntegerField(label = (u'NSU ID'))
     #nsu_ID = forms.IntegerField(required=False)
 

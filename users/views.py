@@ -103,6 +103,25 @@ class CreateStudent(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
         return self.request.user.is_staff
 
+class UpdateStudent(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    fields = ['name','id', 'email']
+    model = Student
+    success_url = reverse_lazy("students")
+
+    def form_valid(self, form):
+            #form<this form> <set author> = current logged in user
+            #form.instance.author = self.request.user
+            #run overridden form_valid method
+            return super().form_valid(form)
+
+    def test_func(self):
+        if self.request.user.is_staff:
+            return True
+        return False
+
+    def update(self, *args, **kwargs):
+        messages.success(self.request, "Student details Updated!")
+        return super().update(*args, **kwargs)
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

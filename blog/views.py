@@ -27,7 +27,7 @@ class PostListView(LoginRequiredMixin, ListView):
     template_name = 'blog/home.html'
     #<app>/<model>_<viewtype>.html
     context_object_name = 'posts' #use post.author instead of object.author
-    ordering = ['-date_posted'] #for ordering accoing to date
+    ordering = ['-date_updated'] #for ordering accoing to date
     paginate_by = 15 #buit in paginator function
 
 class UserPostListView(LoginRequiredMixin, ListView):
@@ -76,6 +76,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         #form<this form> <set author> = current logged in user
         #form.instance.author = self.request.user
         #run overridden form_valid method
+        form.instance.date_updated = timezone.now()
         return super().form_valid(form)
 
     def test_func(self):

@@ -125,7 +125,7 @@
               <div class="card">
                 <img class="card-img-top" src="{{ user.profile.image.url }}" alt="Card image cap">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="{% url 'user-detail' user.profile.id %}">{{ user.username }}</a></h5>
+                  <h5 class="card-title text-uppercase text-center"><a href="{% url 'user-detail' user.profile.id %}">{{ user.username }}</a></h5>
 
 
                   <small>Blog Posts: <a href="{% url 'user-posts' user.username %}">{{ user.post.count }}</a></small><br>
@@ -195,7 +195,7 @@
            <div class="col-md-12 col-lg-4">
              <div class="footer-logo">
 
-               <a class="navbar-brand" href="#">NSU Social</a>
+               <a class="navbar-brand" href="{% url 'blog-home' %}"><b>NSU Social</b></a>
                <p>A social platform for the students of NSU.</p>
 
              </div>

@@ -2,20 +2,31 @@
 {% block content %}
 <div class="container col-md-10">
 <h3 class="mb-3">Blog Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h3>
-    {% for post in posts %}
-        <article class="media content-section">
-          <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" alt="">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'user-detail' post.author.profile.id %}">{{ post.author }}</a>
-              <small class="text-muted">Posted: {{ post.date_posted|date:"d M, Y" }}</small>
+{% for post in posts %}
+    <article class="media content-section">
+      <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" alt="">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="{% url 'user-posts' post.author.username %}"></a>
+          <a class="mr-2" href="{% url 'user-detail' post.author.profile.id %}">@{{ post.author }}</a>
+          <small class="text-muted float-right">Posted: {{ post.date_posted|date:"d M, Y" }}</small>
 
-            </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+          {% if post.author == user or user.is_staff %}
+          <div class="">
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
           </div>
-        </article>
-    {% endfor %}
+          {% endif %}
+
+        </div>
+        <h4><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+        <p class="article-content">{{ post.content }}</p>
+        <small class="text-muted float-right">Last Updated: {{ post.date_updated|date:"d M, Y" }}</small>
+
+      </div>
+
+    </article>
+{% endfor %}
 
     <!--Paginator -->
     {% if is_paginated %}

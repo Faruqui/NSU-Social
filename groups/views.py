@@ -20,6 +20,7 @@ class SingleGroup(LoginRequiredMixin, generic.DetailView):
 
 class ListGroups(LoginRequiredMixin, generic.ListView):
     model = Group
+    ordering = ['name']
 
 
 class JoinGroup(LoginRequiredMixin, generic.RedirectView):
