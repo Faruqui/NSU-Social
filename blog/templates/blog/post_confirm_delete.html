@@ -9,6 +9,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Delete Post</legend>
                 <h4>Are you sure you want to delete the post: <a href="{% url 'post-detail' object.id %}">{{ object.title }}</a></h4>
+                  {% include "blog/_post.html" %}
 
             </fieldset>
             <div class="form-group">

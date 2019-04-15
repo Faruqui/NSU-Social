@@ -59,10 +59,15 @@
         </div>
       </div>
 
-      <legend class="border-bottom mb-4">Bio: </legend>
+      <legend class="border-bottom mb-4 text-info">Bio</legend>
       <article class="media content-section">
         <p>{{ object.bio }}</p>
+
       </article>
+      <legend class="border-bottom mb-4 text-info text-center">Posts</legend>
+      {% for post in object.user.post.all %}
+        {% include "blog/_post.html" %}
+      {% endfor %}
 
       <!-- Posts HERE -->
 

@@ -28,7 +28,7 @@ class PostListView(LoginRequiredMixin, ListView):
     #<app>/<model>_<viewtype>.html
     context_object_name = 'posts' #use post.author instead of object.author
     ordering = ['-date_updated'] #for ordering accoing to date
-    paginate_by = 15 #buit in paginator function
+    paginate_by = 10 #buit in paginator function
 
 class UserPostListView(LoginRequiredMixin, ListView):
     model = Post
@@ -38,7 +38,7 @@ class UserPostListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username = self.kwargs.get('username'))
-        return Post.objects.filter(author = user).order_by('-date_posted')
+        return Post.objects.filter(author = user).order_by('-date_updated')
 
 
 

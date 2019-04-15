@@ -1,40 +1,13 @@
 {% extends "posts/post_base.html" %}
 
-{% block prepost %}
-<div class="container col-md-5">
-	<h5>{{ post_user.username }}'s Group Posts ({{ post_user.posts.count }})</h5>
-</div>
-{% endblock %}
-
 {% block post_content %}
 <div class="container col-md-10">
-	<div class="container">
-		{% for post in post_list %}
-			{% include "posts/_post.html" %}
-		{% endfor %}
-	</div>
-</div>
-
-<!--Paginator -->
-{% if is_paginated %}
-
-	{% if page_obj.has_previous %}
-		<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-		<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-	{% endif %}
-
-	{% for num in page_obj.paginator.page_range %}
-		{% if page_obj.number == num %}
-			<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-		{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-			<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-		{% endif %}
+<h3 class="mb-3">Group Posts by {{ post_user.username }} ({{ post_user.posts.count }})</h3>
+{% include "blog/_paginator.html" %}
+	{% for post in post_list %}
+		{% include "posts/_post.html" %}
 	{% endfor %}
-
-	{% if page_obj.has_next %}
-		<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-		<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-	{% endif %}
-
-{% endif %}
+{% include "blog/_paginator.html" %}
+</div>
+<!--Paginator -->
 {% endblock %}

@@ -7,8 +7,8 @@
       <div class="article-metadata">
         <a class="mr-2" href="{% url 'user-detail' post.user.profile.id %}">@{{ post.user.username }}</a>
         <small class="text-muted"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
-          {{ post.created_at|date:"d M, Y" }}</a></small>
-
+          {{ post.created_at|date:"d-M-y, h:i A" }}</a></small>
+        
           {% if post.group %}
 			<span class="group-name">in <a href="{% url 'groups:single' slug=post.group.slug %}">{{ post.group.name }}</a></span>
 			{% endif %}

@@ -1,0 +1,27 @@
+{% if user.is_authenticated %}
+<div class="container col-md-10">
+  <div class="content-section">
+    <h3 class="text-center text-info">Hello!</h3>
+    <p class='text-muted text-center'>Welcome to NSU Social
+      <ul class="list-group">
+
+        <a href="{% url 'blog-home' %} "class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Latest Posts</b></a>
+
+        <a href="{% url 'user-posts' user.username %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Your Posts</b></a>
+
+        <a href="{% url 'groups:all' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Groups</b></a>
+
+        <a href="{% url 'members' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-secondary text-center">
+          <b class="mb-0 text-white">Community</b></a>
+
+        <a href="{% url 'post-create' %}"class="list-group-item list-group-item-action flex-column align-items-start bg-info text-center">
+          <b class="mb-0 text-white">New Post</b></a>
+
+      </ul>
+    </p>
+  </div>
+</div>
+{% endif %}

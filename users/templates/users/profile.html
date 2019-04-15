@@ -7,6 +7,7 @@
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
+          <a class="btn btn-info btn-sm mt-1 mb-1 float-right" href="{% url 'editprofile' %}">Edit Profile</a>
           <h2 class="account-heading">{{ user.username }} </h2>
 
           <p class="text-secondary">
@@ -23,7 +24,7 @@
   					{{ user.posts.count }}</span></a>
           <br>
         </div>
-        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'editprofile' %}">Edit Profile</a>
+
 
       </div>
 

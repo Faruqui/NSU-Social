@@ -176,7 +176,10 @@
         </div>
 
         <div class="col-md-3">
+
+          {% include "blog/_sidebar.html" %}
           {% block side_content %}{% endblock %}
+
         </div>
       </div>
     </main>
@@ -188,7 +191,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-    <footer class="footer">
+    <footer class="footer" style = "margin-top: 5rem;">
        <div class="container-flow jumbotron">
          <div class="row">
 
