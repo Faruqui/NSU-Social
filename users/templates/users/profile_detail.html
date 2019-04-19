@@ -65,7 +65,7 @@
 
       </article>
       <legend class="border-bottom mb-4 text-info text-center">Posts</legend>
-      {% for post in object.user.post.all %}
+      {% for post in object.user.post.all reversed %}
         {% include "blog/_post.html" %}
       {% endfor %}
 

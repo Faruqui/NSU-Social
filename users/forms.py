@@ -7,44 +7,51 @@ from .models import Profile, Student
 class UserRegisterForm(UserCreationForm):
     #email = forms.EmailField()
     email = forms.EmailField(label = (u'NSU Email Adress')) #for labelling
-    nsu_id = forms.IntegerField(label = (u'NSU ID'))
+    #nsu_id = forms.IntegerField(label = (u'NSU ID'))
     #nsu_ID = forms.IntegerField(required=False)
-
-    def clean(self):
-        cleaned_data = super().clean()
-        mail = cleaned_data.get('email')
-        nsuID = cleaned_data.get('nsu_id')
-        x = "afsaf"
-        if Student.objects.filter(email = mail).count() > 0:
-            x = get_object_or_404(Student, email=mail).id
-        if x != nsuID:
-            raise forms.ValidationError("ID and email don't match")
 
     def clean_email(self):
         data = self.cleaned_data['email']
-        std = Student.objects.filter(email = data)
-        if Student.objects.filter(email = data).count() == 0:
-            raise forms.ValidationError("Must be an official NorthSouth email address")
+        if "@northsouth.edu" not in data:   # any check you need
+            raise forms.ValidationError("Must be an official northsouth email address")
         return data
 
-    def clean_nsu_id(self):
-        data = self.cleaned_data['nsu_id']
-        std = Student.objects.filter(email = data)
-        if Student.objects.filter(id = data).count() == 0:
-            raise forms.ValidationError("Must be a valid id")
-        return data
+
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     mail = cleaned_data.get('email')
+    #     nsuID = cleaned_data.get('nsu_id')
+    #     x = "afsaf"
+    #     if Student.objects.filter(email = mail).count() > 0:
+    #         x = get_object_or_404(Student, email=mail).id
+    #     if x != nsuID:
+    #         raise forms.ValidationError("ID and email don't match")
+    #
+    # def clean_email(self):
+    #     data = self.cleaned_data['email']
+    #     std = Student.objects.filter(email = data)
+    #     if Student.objects.filter(email = data).count() == 0:
+    #         raise forms.ValidationError("Must be an official NorthSouth email address")
+    #     return data
+    #
+    # def clean_nsu_id(self):
+    #     data = self.cleaned_data['nsu_id']
+    #     std = Student.objects.filter(email = data)
+    #     if Student.objects.filter(id = data).count() == 0:
+    #         raise forms.ValidationError("Must be a valid id")
+    #     return data
 
     class Meta:
         model = User
-        fields = ['username','nsu_id', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     def clean_email(self):
         data = self.cleaned_data['email']
-        if Student.objects.filter(email = data).count() == 0:
-            raise forms.ValidationError("Must be an official NorthSouth email address")
+        if "@northsouth.edu" not in data:   # any check you need
+            raise forms.ValidationError("Must be an official northsouth email address")
         return data
 
     class Meta:
@@ -52,11 +59,11 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'username', 'email']
 
 class ProfileUpdateForm(forms.ModelForm):
-    def clean_nsu_id(self):
-        data = self.cleaned_data['nsu_id']
-        if Student.objects.filter(id = data).count() == 0:
-            raise forms.ValidationError("Must be an official NSU student ID")
-        return data
+    # def clean_nsu_id(self):
+    #     data = self.cleaned_data['nsu_id']
+    #     if Student.objects.filter(id = data).count() == 0:
+    #         raise forms.ValidationError("Must be an official NSU student ID")
+    #     return data
 
     def clean_fb_link(self):
         data = self.cleaned_data['fb_link']

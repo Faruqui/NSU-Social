@@ -131,6 +131,7 @@
                   <small>Blog Posts: <a href="{% url 'user-posts' user.username %}">{{ user.post.count }}</a></small><br>
                   <small>Group Posts: <a href="{% url 'posts:for_user' username=user.username %}">{{ user.posts.count }}</a></small><br>
                   <small>Joined: {{ user.profile.date_registered|date:"d M, Y"  }}</small><br>
+                  <b class="text-info text-center">{{user.profile.status}}</b>
                   <br>
 
                   <!-- Social media links -->
